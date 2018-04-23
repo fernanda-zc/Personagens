@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>      
+    <style>
+        img {
+            border: 1px solid #ddd; /* Gray border */
+            border-radius: 4px;  /* Rounded border */
+            padding: 5px; /* Some padding */
+            width: 150px; /* Set a small width */
+        }
+
+        /* Add a hover effect (blue shadow) */
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }
+    </style>
+    <div layout="row" ng-controller="personagensController" ng-cloak>
+        <div flex="10"></div>
+
+        <div flex="80" class='m-20px-0'>
+
+            <!-- page title & 'create personagem' button -->
+            <md-toolbar class="md-hue-2">
+                <div class="md-toolbar-tools">
+                    <!-- page title -->
+                    <div flex md-truncate>
+                        <h3 class="md-headline">Personagens</h3>
+                    </div>
+
+                    <!-- button for creating personagem -->
+                    <md-button class="md-raised" ng-click="showCreatePersonagemForm()">Novo personagem</md-button>
+                    <md-button class="md-raised" ng-click="showCreateTipoForm()">Novo tipo</md-button>
+                    <md-button class="md-raised" ng-click="showCreateEspecialidadeForm()">Nova especialidade</md-button>
+
+                </div>
+            </md-toolbar>
+
+            <!-- used for searching personagens in api -->
+            <md-input-container class="md-block m-b-0px">
+                <form ng-submit="searchPersonagens()">
+                    <label>Buscar personagens... (digite parte do nome do personagem desejado e pressione a tecla "enter" para buscar)</label>
+                    <input ng-model="search_keywords">
+                </form>
+            </md-input-container>
+
+            <md-content flex>
+                <!-- show personagem record list -->
+                <md-list ng-init="readPersonagens()">
+                    <md-list-item class="md-3-line" ng-repeat="personagem in personagens">
+                        <!-- personagem information -->
+                        <div class="md-list-item-text">
+                            <h2>{{personagem.nome}}</h2>
+                            <h3 ng-repeat="tipo_ in tipos| filter : {id: personagem.tipo_id}">
+                                <div>{{ tipo_.descricao}}</div>
+                            </h3>
+                            <span ng-repeat="personagem_esp in personagem_especialidade| filter: {personagem_id : personagem.id} " 
+                                  > 
+                                <span ng-repeat="esp in especialidades|filter:{id : personagem_esp.especialidade_id}">
+                                    {{esp.descricao}}
+                                </span>
+                            </span>
+                            <h3 ng-repeat="per_espec in personagem_especialidade| filter : {personagem_id: personagem.id}">                                
+                                <div>{{ per_espec.descricao}}</div>
+                            </h3>
+                            <h4>Vida: {{personagem.vida}}   Defesa: {{personagem.defesa}}   Dano: {{personagem.dano}}</h4>
+                            <h4>Velocidade de ataque: {{personagem.velocidade_ataque}}</h4>
+                            <h4>Velocidade de movimento: {{personagem.velocidade_movimento}}</h4>
+
+                        </div>
+                        <div class="md-secondary-container">
+                            <a target="_blank" href={{personagem.arquivo_caminho}}>
+                                <img src="{{personagem.arquivo_caminho}}" alt="Forest">
+                            </a>
+                        </div>
+                        <!-- 'read one', 'edit' and 'delete' buttons -->
+                        <div class="md-secondary-container">
+                            <!-- 'read one' button will be here -->
+                            <md-button class="md-raised md-primary" ng-click="showUpdatePersonagemForm(personagem.id)">Alterar</md-button>
+                            <md-button class="md-raised md-danger" ng-click="confirmDeletePersonagem($event, personagem.id)">Excluir</md-button>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </div>
+
+        <div flex="10"></div>
+    </div> <!-- end row -->
+</html>

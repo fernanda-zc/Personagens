@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+    <body>
+        <div>
+            <md-dialog>
+                <form ng-cloak>
+
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                            <h2>Novo Tipo</h2>
+                        </div>
+                    </md-toolbar>
+
+                    <md-dialog-content>
+                        <div class="md-dialog-content">
+
+
+                            <md-input-container class="md-block">
+                                <label>Descrição</label>
+                                <input ng-model="description">
+                            </md-input-container>
+
+
+                        </div>
+                    </md-dialog-content>
+
+                    <md-dialog-actions layout="row">
+                        <md-button ng-click="cancel()">Cancelar</md-button>
+                        <md-button ng-click="createTipo()" class="md-primary">Criar</md-button>
+                    </md-dialog-actions>
+                </form>
+            </md-dialog>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <!--<head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>-->
+    <head>
+        <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    </head>
+    <body>
+    <md-dialog>
+        <form name="formCreate" ng-cloak>
+
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Novo Personagem</h2>
+                </div>
+            </md-toolbar>
+
+            <md-dialog-content>
+                <div class="md-dialog-content">
+                    <label>(*) Campos obrigatórios (é necessário preencher os campos obrigatórios para habilitar o botão Criar)</label>
+
+                    <!-- we are using ng-model to bind this view and the 'personagem model -->
+                    <md-input-container class="md-block">
+                        <label>Nome</label>
+                        <input ng-model="name"  ng-required="true">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Vida</label>
+                        <input ng-model="vida" type="number" step="0.01" min="0">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Defesa</label>
+                        <input ng-model="defesa" type="number" step="0.01" min="0">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Dano</label>
+                        <input type="number" ng-model="dano" step="0.01" min="0">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Velocidade de ataque</label>
+                        <input type="number" ng-model="velocidade_ataque" step="0.01" min="0">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Velocidade de movimento</label>
+                        <input type="number" ng-model="velocidade_movimento" step="0.01" min="0">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Tipo*</label>                    
+                        <br><br>
+                        <select ng-model="selectedTipo" ng-options="x.descricao for x in tipos" required>
+                        </select>    
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Especialidade* (mantenha pressionada a tecla "Shift" para selecionar mais que uma)</label>                     
+                        <br><br>
+                        <select ng-model="selectedEsp" multiple="true" ng-options="x.descricao for x in especialidades" required>
+                        </select>
+                    </md-input-container> 
+                    <md-input-container class="md-block">
+                        <label>Imagem*</label>    
+                    </md-input-container> 
+                    <br>
+                    <input type="file" file-input="files" required/>  
+
+
+                </div>
+            </md-dialog-content>
+
+
+            <md-dialog-actions layout="row">
+                <md-button ng-click="cancel()">Cancelar</md-button>
+                <md-button ng-click="createPersonagem()" class="md-primary" ng-disabled="formCreate.$invalid">Criar</md-button>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
+
+</body>
+</html>
