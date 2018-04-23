@@ -1,0 +1,38 @@
+CREATE SCHEMA `db_personagens` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE `db_personagens`.`personagens` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NULL,
+  `vida` FLOAT NULL,
+  `defesa` FLOAT NULL,
+  `dano` FLOAT NULL,
+  `velocidade_ataque` FLOAT NULL,
+  `velocidade_movimento` FLOAT NULL,
+  `tipo_id` INT NULL, `arquivo_caminho` VARCHAR(150) NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `db_personagens`.`especialidades` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descricao` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `db_personagens`.`tipos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `descricao` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `db_personagens`.`personagem_especialidade` (
+  `personagem_id` INT NOT NULL,
+  `especialidade_id` INT NOT NULL,
+  PRIMARY KEY (`personagem_id`, `especialidade_id`));
+
+
+INSERT INTO `db_personagens`.`tipos` (`descricao`) VALUES ('Lutador');
+
+INSERT INTO `db_personagens`.`tipos` (`descricao`) VALUES ('Arqueiro');
+
+INSERT INTO `db_personagens`.`especialidades` (`descricao`) VALUES ('Tanker');
+INSERT INTO `db_personagens`.`especialidades` (`descricao`) VALUES ('Antitanque');
